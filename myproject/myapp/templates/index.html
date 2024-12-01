@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект Django</title>
+    <style>
+        h1 { color: #333; }
+        h2 { color: #555; }
+        .student { font-style: italic; color: #6c757d; }
+        th { font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Назва проекту: Django</h1>
+    <h2>ПІБ студента: <span class="student">Навозенко Максим Петрович</span>, група: <span class="student">КІ-21012Б</span></h2>
+
+    <h2>Таблиця: Співробітники</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Код співробітника</th>
+                <th>Прізвище</th>
+                <th>Ім'я</th>
+                <th>По батькові</th>
+                <th>Телефон</th>
+                <th>Освіта</th>
+                <th>Відділ</th>
+                <th>Посада</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.employee_code }}</td>
+                    <td>{{ employee.last_name }}</td>
+                    <td>{{ employee.first_name }}</td>
+                    <td>{{ employee.middle_name }}</td>
+                    <td>{{ employee.phone }}</td>
+                    <td>{{ employee.education }}</td>
+                    <td>{{ employee.department_code.name }}</td>
+                    <td>{{ employee.position_code.title }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Таблиця: Відділи</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Код відділу</th>
+                <th>Назва</th>
+                <th>Телефон</th>
+                <th>Номер кімнати</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for department in departments %}
+                <tr>
+                    <td>{{ department.department_code }}</td>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.phone }}</td>
+                    <td>{{ department.room_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Таблиця: Посади</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Код посади</th>
+                <th>Назва посади</th>
+                <th>Оклад</th>
+                <th>Премія (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for position in positions %}
+                <tr>
+                    <td>{{ position.position_code }}</td>
+                    <td>{{ position.title }}</td>
+                    <td>{{ position.salary }}</td>
+                    <td>{{ position.bonus_percent }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Таблиця: Проекти</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Номер проекту</th>
+                <th>Назва</th>
+                <th>Термін виконання</th>
+                <th>Бюджет</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.project_number }}</td>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.deadline }}</td>
+                    <td>{{ project.budget }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Таблиця: Виконання проектів</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Код виконання</th>
+                <th>Проект</th>
+                <th>Відділ</th>
+                <th>Дата початку</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for execution in project_executions %}
+                <tr>
+                    <td>{{ execution.execution_code }}</td>
+                    <td>{{ execution.project_number.name }}</td>
+                    <td>{{ execution.department_code.name }}</td>
+                    <td>{{ execution.start_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
